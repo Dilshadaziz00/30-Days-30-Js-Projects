@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage Calculator</title>
+    <style>
+        .items{
+           text-align: center;
+            
+
+        }
+    </style>
+</head>
+<body>
+<div class="items">
+<input type="number" id="marks">
+<button onclick="calculatePercentage()">Calculate Percentage</button>
+<p id="result"></p>
+<p id="percentage"></p>
+</div>
+<script>
+    function calculatePercentage() {
+       
+        const marks = document.getElementById("marks").value;
+        let Grade =null;
+        let percentage = null;
+        if (marks >= 90) {
+            Grade="A+"
+            percentage = " 100%";
+        } else if (marks >= 80) {
+            Grade="A"
+            percentage = "89%";
+        } else if (marks >= 75) {
+              Grade="B+"
+            percentage = " 79%";
+        } else if (marks >= 70) {
+            Grade="B"
+            percentage = "74%";
+        } else if (marks >= 65) {
+            Grade="B-"
+            percentage = " 69%";
+        } else if (marks >= 60) {
+            Grade="C+"
+            percentage = "64%";
+        } else if (marks >= 55) {
+            Grade="C"
+            percentage = "59%";
+        } else {
+            Grade=" Sorry You are Fail...(˙◠˙)..."
+            percentage = " 50%";
+        }
+        document.getElementById("result").innerText = "Grade: " + Grade;
+        document.getElementById("percentage").innerText = "Percentage: " + percentage;
+    }
+        </script>
+</body>
+</html>
