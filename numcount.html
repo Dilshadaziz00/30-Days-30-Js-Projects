@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Num count</title>
+</head>
+<body>
+    <button class="minus-btn">-</button>
+  <input class="input" type="number" value="0">
+    <button class="plus-btn">+</button>
+    <button class="reset">Reset</button>
+    <script>
+        document.addEventListener("click", function(event) {
+            let plus = document.querySelector('.plus-btn');
+            let minus = document.querySelector('.minus-btn');
+            let input = document.querySelector('.input');
+            let reset=document.querySelector('.reset');
+    
+            if (event.target === plus) {
+                input.value++;
+            } else if (event.target === minus && input.value > 0) {
+                input.value--;
+            } else if (event.target === reset) {
+                input.value=0;
+            } 
+        });
+    </script>
+    
+</body>
+</html>

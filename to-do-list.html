@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>To Do list</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .main {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #3498db;
+        }
+
+        .box {
+            width: 700px;
+            min-height: 500px;
+            background-color: white;
+            border-radius: 5px;
+            padding: 15px;
+        }
+       
+        #item {
+            padding: 10px;
+            font-size: 20px;
+            width: 100%;
+            border: 0;
+            outline: 0;
+            display: block;
+            font-weight: bold;
+            border-radius: 25px;
+            box-shadow: 0px 0px 2px grey;
+            padding-left: 22px;
+        }
+
+        #to-do-box {
+            margin-top: 20px;
+            list-style: none;
+        }
+
+        #to-do-box li {
+            position: relative;
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px;
+            border-radius: 2px;
+            padding-right: 30px;
+            text-align: justify;
+            margin-top: 10px;
+            user-select: none;
+        }
+
+        #to-do-box li i {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+        
+        }
+
+        .done {
+            text-decoration: line-through;
+            color: black;
+            background-color: #95a5a6 !important;
+        }
+
+        .edit-btn {
+            float: right;
+            background: transparent;
+            color: #fff;
+            border: none;
+            padding-right: 25px;
+            cursor: pointer;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            
+        }
+
+        .check-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            pointer-events: none;
+            display: none;
+        }
+
+        input[type="text"] {
+            padding-right: 30px;
+           
+        }
+      
+        h1 {
+            color: #fff;
+            font-weight: 900;
+            text-align: center;
+            padding: 0px 0px 20px 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <h1>My To-Do List</h1>
+        <div class="box">
+            <div class="input-wrapper">
+                <input type="text" id="item" autofocus placeholder="Write something here...">
+                <span class="check-icon "><i class="fas fa-check-circle"></i></span>
+            </div>
+            <ul id="to-do-box"></ul>
+        </div>
+    </div>
+    <script>
+        const items = document.querySelector('#item');
+        const box = document.querySelector('#to-do-box');
+        const checkIcon = document.querySelector('.check-icon');
+        // Event listener to remove d-none
+
+        items.addEventListener('input', (event) => {
+            const inputValue = items.value.trim();
+            checkIcon.style.display = inputValue.length > 0 ? 'block' : 'none';
+            checkIcon.style.color = inputValue.length >= 4 ? 'green' : 'red';
+            if (inputValue.length >= 4 && event.key === "Enter") {
+                addToDo(inputValue);
+                items.value = '';
+            }
+            
+        });
+
+        // Event listener for adding new items on Enter key press
+
+        items.addEventListener('keyup', (event) => {
+            const inputValue = items.value.trim();
+            if (inputValue.length >= 4 && event.key === "Enter") {
+                addToDo(items.value)
+                items.value = '';
+                checkIcon.style.display = 'none';
+            }
+
+        });
+        // Function to add a new to-do item
+        const addToDo = (text) => {
+            if (text.length < 4 || text.trim() === "") return;
+            let listItem = document.createElement('li');
+            listItem.innerHTML = `
+                  <span>${text}</span>
+             <button class="edit-btn">Edit</button>
+             <i class=" fas fa-times"></i>
+              `;
+            // Event listener toggle to-do list
+            listItem.addEventListener('click', () => {
+                listItem.classList.toggle('done');
+                // const editBtn = document.querySelector('.edit-btn');
+                // editBtn.style.cursor = 'not-allowed';
+            });
+            // Event listener for remove to-do list
+            listItem.querySelector('i').addEventListener('click', () => {
+                listItem.remove();
+                saveToLocalStorage();
+
+            });
+            // Event listener for  edit and update text
+            listItem.querySelector('.edit-btn').addEventListener('click', () => {
+                let spanElement = listItem.querySelector('span');
+                let currentText = spanElement.textContent;
+                items.value = currentText;
+                listItem.remove();
+                saveToLocalStorage();
+                checkIcon.style.display = 'block';
+            });
+            box.appendChild(listItem)
+            saveToLocalStorage();
+        }
+        // Function to save current list items to localStorage
+
+        const saveToLocalStorage = () => {
+            const itemsArray = [];
+            const allItems = document.querySelectorAll('#to-do-box li');
+            allItems.forEach(item => {
+                itemsArray.push(item.querySelector('span').textContent);
+            });
+            
+            localStorage.setItem('toDoList', JSON.stringify(itemsArray));
+        }
+
+        // Function to load list items from localStorage on page load
+        const loadFromLocalStorage = () => {
+            const lsItems = JSON.parse(localStorage.getItem('toDoList'));
+            if (lsItems) {
+                lsItems.forEach(item => {
+                    addToDo(item);
+                });
+            }
+        }
+        // Load items from localStorage when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFromLocalStorage();
+        });
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

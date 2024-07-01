@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template String</title>
+</head>
+<body>
+    <script>
+                // Template String with variables
+                 let a =22;
+                 let b=33;
+                
+                let c =`Sum is ${a + b}`
+                 document.write(c);
+
+
+        // Template String in function 
+        let fname = "Ali";
+        let lname = "Khan";
+         function fullName(fname,lname){
+     return`Hello ${fname} ${lname}`;
+
+         }
+           let name =`${ fullName(fname,lname)}`;
+           document.write(name);
+    </script>
+    
+</body>
+</html>

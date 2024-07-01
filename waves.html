@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waves Effects</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #080707;
+            font-family: Arial, sans-serif;
+        }
+        h2{
+            color:#fff;
+        }
+        .container{
+           max-width: 450px;
+            display: flex;
+            flex-wrap: wrap;
+          
+        }
+        .circle{
+            width: 14px;
+            height: 14px;
+            background-color: #fff;
+            margin: 8px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform .3s linear;
+        }
+        .circle.grow{
+            transform: scale(2);
+        }
+    </style>
+</head>
+<body>
+    <h2 class="">levitate Board</h2>
+    <div class="container">
+       
+    </div>
+</body>
+<script>
+
+      const container=document.querySelector('.container');
+    let circleArray=[];
+    let rows=15;
+    let cols=15;
+       for(let i =0; i < rows; i++){
+        circleArray[i]=[];
+        for(let j =0; j < cols; j++){
+           
+            const circle=document.createElement('div');
+            circle.classList.add('circle');
+            container.appendChild(circle)
+            circleArray[i].push(circle)
+        }
+    }
+    circleArray.forEach((cols, i) =>{
+        cols.forEach((circle, j) =>{
+      circle.addEventListener('click', () => {
+        growCircle(i,j);
+      })
+    })
+    })
+    function   growCircle(i,j) {
+        if(circleArray[i] && circleArray[i][j] && !circleArray[i][j].classList.contains('grow')){
+            circleArray[i][j].classList.add('grow');
+            setTimeout(()=>{
+                growCircle(i - 1,j);
+                growCircle(i + 1,j);
+                growCircle(i,j -1);
+                growCircle(i,j +1);
+            },100);
+            setTimeout(()=>{
+                circleArray[i][j].classList.remove('grow');
+            },300);
+        }
+        
+    }
+</script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter </title>
+</head>
+<body>
+    <body>
+        <input type="text" id="searchInput" placeholder="Search....">
+        <ul id="studentsList"></ul>
+    
+        <script>
+            // Initial student data
+            let students = [
+                { name: "John", fatherName: "Michael", grade: "A", totalNumber: 95 },
+                { name: "Emily", fatherName: "David", grade: "B", totalNumber: 87 },
+                { name: "James", fatherName: "Robert", grade: "A", totalNumber: 92 },
+                { name: "Sarah", fatherName: "William", grade: "B", totalNumber: 88 },
+                { name: "Michael", fatherName: "Richard", grade: "A", totalNumber: 96 },
+                { name: "Michael", fatherName: "Richard", grade: "F", totalNumber: 30 }
+            ];
+    
+           
+        // Function to filter and display students
+        function filterStudents() {
+            const searchText = document.getElementById('searchInput').value.trim().toLowerCase();
+            console.log("Search text:", searchText); // Log search text to debug
+
+   const filteredStudents = students.filter(student =>
+    student.name.toLowerCase().includes(searchText) ||
+    student.fatherName.toLowerCase().includes(searchText) ||
+    student.totalNumber.toString().includes(searchText) 
+   
+);
+            const studentsList = document.getElementById('studentsList');
+            studentsList.innerHTML = ''; // Clear previous list items
+
+            filteredStudents.forEach(student => {
+                const li = document.createElement('li');
+                li.textContent = `${student.name} (${student.grade}, ${student.totalNumber})`;
+                studentsList.appendChild(li);
+            });
+        }
+
+        // Add event listener to input field
+        document.getElementById('searchInput').addEventListener('keyup', filterStudents);
+
+        // Display all students initially
+        filterStudents();
+    //    const newArray= students.map((std) => ({...std, result:std.totalNumber<=90? 'Fail':'Pass'}))
+      // map 
+// const newArray = students.map((student)=>({...student, result:student.grade=='F'?'Fail':'Pass'}))
+// console.log(newArray)
+
+// const filterStudents = students.filter((student)=>(student.totalNumber>=80&&student.grade=='B'))
+// console.log(filterStudents)
+        </script>
+    </body>
+
+
+
+  
+</html>

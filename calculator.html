@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CALCULATOR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      <style>
+
+        body{
+         background-color: #3a4452 ;
+           
+        }
+       
+        .button{
+            border-radius: 50%;
+            border: none;
+            width: 50px;
+            height: 50px;
+            margin: 10px;
+            background: transparent;
+            color: #ffff;
+            font-size: 22px;
+            box-shadow: -8px ,-8px ,15px rgb(255,255,255, 0.1);
+        }
+        .button:hover{
+                  padding: 5px;
+                  color:black;
+            background-color: white;
+            
+        }
+        .equalbtn{
+
+            background-color: rgb(166, 125, 0);
+        }
+        .equalbtn:hover{
+                  padding: 5px;
+            color:white;
+
+                  background-color: rgb(166, 125, 0);
+        }
+        .opraterbtn{
+            color: rgb(184, 117, 11);
+        }
+        .opraterbtn:hover{
+                  padding: 5px;
+                  background-color:brown;
+            color:white;
+
+        }
+        
+        </style>
+</head>
+
+<body>
+    <div class="container-fluid d-flex   justify-content-center mt-5   ">
+    <div class="card shadow-sm  bg-dark  shadow-lg  mt-2">
+        <div class="card-body  ">
+            <input type="text" class="form-control-lg w-100 p-4  border-0  bg-transparent text-end  text-white " id="inputBox"  placeholder ="0">
+            <div class="mt-2"> 
+                <button class=" button opraterbtn">AC</button>
+                <button class="button opraterbtn">DEL</button>
+                <button class="button opraterbtn">/</button>
+                <button class="button opraterbtn">%</button>
+            </div>
+            <div class="mt-1 "> 
+                <button class="button">7</button>
+                <button class="button">8</button>
+                <button class="button">9</button>
+                <button class="button opraterbtn">*</button>
+            </div>
+             <div class="mt-1 "> 
+                 <button class="button">4</button>
+                 <button class="button">5</button>
+                <button class="button">6</button>
+                <button class="button opraterbtn">-</button>
+            </div>
+            <div class="mt-1 "> 
+                <button class="button">1</button>
+                <button class="button">2</button>
+                <button class="button">3</button>
+                <button class="button opraterbtn">+</button>
+            </div>
+            <div class="mt-1 "> 
+                <button class="button">00</button>
+                <button class="button">0</button>
+                <button class="button">.</button>
+                <button class="button equalbtn">=</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+     let input= document.querySelector('#inputBox')
+     let buttons= document.querySelectorAll('.button');
+     console.log(buttons)
+     let string=('');
+     let arr= Array.from(buttons);
+     console.log(arr)
+      arr.forEach(button =>{
+       button.addEventListener('click', (e)=>{
+        if(e.target.innerHTML== '=')  {
+            string = eval(string);
+            input.value = string;
+        }
+        else if(e.target.innerHTML== 'AC')  {
+            string = "";
+            input.value = string;
+        }
+        else if(e.target.innerHTML== 'DEL')  {
+            string = string.substring(0,string.length-1 );
+            input.value = string;
+        }
+        else  {
+            string += e.target.innerHTML;
+            input.value = string;
+        }
+        console.log(arr)
+       });
+      });
+</script>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+    <style>
+        * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#main {
+    width: 100%;
+    min-height: 100vh;
+    padding-bottom: 50px;
+    background-color: #81ecec;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#addBtn {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    background-color: #2d3436;
+    color: white;
+    padding: 10px;
+    border: 0;
+    outline: 0;
+    border-radius: 5px;
+}
+
+.note {
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    margin: 15px;
+    margin-top: 55px;
+}
+
+.tool {
+    width: 100%;
+    background-color: #2d3436;
+    color: white;
+    padding: 5px;
+    display: flex;
+    justify-content: end;
+}
+
+.tool i {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.note textarea {
+    border: none;
+    width: 100%;
+    height: 100%;
+    resize: none;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.note textarea:focus {
+    border: 0;
+    outline: 0;
+}
+    </style>
+</head>
+
+<body>
+    <button id="addBtn">
+        <i class="fas fa-plus"></i>
+        Add Note
+    </button>
+    <div id="main">
+        <!-- <div class="note">
+            <div class="tool">
+                <i class="fas fa-save"></i>
+                <i class="fas fa-trash"></i>
+            </div>
+            <textarea></textarea>
+        </div>
+       -->
+        <script src="https://kit.fontawesome.com/bf520e6492.js" crossorigin="anonymous"></script>
+       
+
+
+        <script>
+
+            const addBtb=document.querySelector('#addBtn');
+            const main=document.querySelector('#main');
+            addBtb.addEventListener('click', () => {
+                addNote()
+            });
+
+             const saveNotes=() =>{
+                const note = document.querySelectorAll('.note textarea');
+              
+               let data=[];
+               note.forEach((el) => {
+                 data.push(el.value)
+               });
+             
+               if(data.length === 0){
+                    localStorage.removeItem("note")
+                }else{
+                localStorage.setItem('note', JSON.stringify(data))
+                }
+              };
+              
+            const  addNote=(text='') =>{
+                 const notes = document.createElement('div');
+                 notes.classList.add('note')
+                 notes.innerHTML=`
+                  <div class="tool">
+                <i class="save fas fa-save"></i>
+                <i class="trash fas fa-trash"></i>
+            </div>
+            <textarea>${text}</textarea>
+            `
+            main.appendChild(notes);
+            notes.querySelector('.trash').addEventListener('click', () =>{
+                notes.remove();
+                saveNotes();
+            });
+            notes.querySelector('.save').addEventListener('click', () =>{
+                saveNotes();
+            });
+            notes.querySelector('textarea').addEventListener('focusout', () => {
+
+                saveNotes();
+              });
+             
+            }
+
+
+            (
+                function (){
+                    const lsNotes =JSON.parse(localStorage.getItem('note'));
+                    if(lsNotes === null){
+                        addNote()
+                }else{
+                    lsNotes.forEach( (lsNotes) => {
+                        addNote(lsNotes)
+                    })
+               
+            }
+                }
+                   
+            )()
+        </script>
+</body>
+
+</html>

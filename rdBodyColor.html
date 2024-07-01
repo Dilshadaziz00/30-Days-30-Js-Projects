@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Light Signal</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+         
+            transition: ease 0.5s;
+            font-family: Arial, sans-serif;
+        }
+        .btn{
+            background-color: #080707;
+            color: #fff;
+            padding: 3px 18px;
+            border-radius: 3px;
+        }
+        .card {
+            width: 100px;
+            background-color: #faf7f7;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            padding: 3px 0;
+        }
+       
+    </style>
+</head>
+<body>
+  
+    <div class="card">
+        <h6 class="color-code">#fff</h6>
+        <button class="btn"> Click me</button>
+    </div>
+</body>
+<script>
+    const getColor= ()=>{
+       let randomColor=Math.floor(Math.random()* 16777215);
+       let randomCode= '#' +  randomColor.toString(16);
+        console.log(randomCode)
+        document.querySelector('.color-code').innerText=randomCode;
+        document.body.style.backgroundColor=randomCode;
+        navigator.clipboard.writeText(randomCode);
+    }
+     document.querySelector('.btn').addEventListener(
+        'click',
+        getColor
+     )
+    getColor();
+</script>
+</html>

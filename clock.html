@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .clock {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border: 10px solid #333;
+            border-radius: 50%;
+            background: white;
+        }
+        .clock::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: #333;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+        .hand {
+            position: absolute;
+            height: 6px;
+            top: 50%;
+            left: 50%;
+            transform-origin: 0% 50%;
+            z-index: 3;
+        }
+        .hand.hour {
+            width: 29%;
+            transform: rotate(30deg);
+            background: #15c405;
+        }
+        .hand.minute {
+            width: 43%;
+            transform: rotate(180deg);
+            background: #3805c4;
+        }
+        .hand.second {
+            width: 48%;
+            background: red;
+            transform: rotate(270deg);
+        }
+        .number {
+            position: absolute;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .number1 { top: 11%; left: 70%; }
+        .number2 { top: 25%; left: 83%; }
+        .number3 { top: 50%; left: 92%; transform: translate(-50%, -50%); }
+        .number4 { top: 64%; left: 86%; }
+        .number5 { top: 80%; left: 72%; }
+        .number6 { top: 87%; left: 50%; transform: translateX(-50%); }
+        .number7 { top: 82%; left: 25%; }
+        .number8 { top: 65%; left: 11%; }
+        .number9 { top: 51%; left: 8%; transform: translate(-50%, -50%); }
+        .number10 { top: 29%; left: 8%; }
+        .number11 { top: 12%; left: 22%; }
+        .number12 { top: 3%; left: 50%; transform: translateX(-50%); }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="hand hour" id="hour"></div>
+        <div class="hand minute" id="minute"></div>
+        <div class="hand second" id="second"></div>
+        <div class="number number1">1</div>
+        <div class="number number2">2</div>
+        <div class="number number3">3</div>
+        <div class="number number4">4</div>
+        <div class="number number5">5</div>
+        <div class="number number6">6</div>
+        <div class="number number7">7</div>
+        <div class="number number8">8</div>
+        <div class="number number9">9</div>
+        <div class="number number10">10</div>
+        <div class="number number11">11</div>
+        <div class="number number12">12</div>
+    </div>
+    <script>
+        const second = document.querySelector('#second');
+        const minute = document.querySelector('#minute');
+        const hour = document.querySelector('#hour');
+
+        const deg = 6;
+        setInterval(() => {
+            let day = new Date();
+            let ms = day.getMilliseconds();
+            let ss = day.getSeconds() * deg + (ms * deg / 1000);
+            let mm = day.getMinutes() * deg + ss / 60;
+            let hh = day.getHours() * 30 + mm / 12;
+            hour.style.transform = `rotateZ(${hh}deg)`;
+            minute.style.transform = `rotateZ(${mm}deg)`;
+            second.style.transform = `rotateZ(${ss}deg)`;
+        }, 1000);
+    </script>
+</body>
+</html>

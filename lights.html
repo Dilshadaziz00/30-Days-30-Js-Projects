@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Light Signal</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #080707;
+            font-family: Arial, sans-serif;
+        }
+        .traffic-light {
+            width: 100px;
+            height: 300px;
+            background-color: #faf7f7;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            padding: 20px 0;
+        }
+        h2{
+            color:#fff;
+        }
+        .circle {
+            width: 60px;
+            height: 60px;
+            background-color: rgb(23, 22, 22);
+            border-radius: 50%;
+        }
+        .circle.red {
+            background-color: red;
+            box-shadow:  0 0 20px 5px red;
+        }
+        .circle.yellow {
+            background-color: yellow;
+            box-shadow:  0 0 20px 5px yellow;
+        }
+        .circle.green {
+            background-color: green;
+            box-shadow:  0 0 20px 5px green;
+        }
+    </style>
+</head>
+<body>
+    <h2 class="">Traffic Lights</h2>
+    <div class="traffic-light">
+        <div class="circle red" color="red"></div>
+        <div class="circle " color="yellow"></div>
+        <div class="circle " color="green"></div>
+    </div>
+</body>
+<script>
+     let circles=document.querySelectorAll('.circle');
+    let activeLight=0;
+    setInterval(changeLight, 2000);
+    function changeLight(){
+      circles[activeLight].classList='circle';
+      activeLight++;
+ if (activeLight > 2)
+ {
+    activeLight=0;
+ }
+   let currantLight=circles[activeLight];
+   currantLight.classList.add(currantLight.getAttribute('color'));
+    }
+</script>
+</html>

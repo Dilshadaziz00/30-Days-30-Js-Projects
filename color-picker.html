@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roller</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+       
+        input {
+            padding: 5px 7px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+       
+    </style>
+</head>
+<body>
+    
+    <h2 >Color picker </h2>
+    <input type="color" id="c" id="color-picker" >
+
+   
+   <script>
+    let colorPicker=document.querySelector('#color-picker');
+
+    colorPicker.addEventListener('input', () =>{
+      const  colorSelector= colorPicker.value;
+      document.body.style.background=colorSelector;
+    })
+   </script>
+</body>
+</html>

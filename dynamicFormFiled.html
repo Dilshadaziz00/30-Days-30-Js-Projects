@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centered Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/url-parse@1.5.10/dist/url-parse.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .input-field {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .form-container form button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100px;
+        }
+        .form-container form button.add {
+            background-color: #4CAF50;
+            color: white;
+            margin-bottom: 5px;
+        }
+        .form-container form button.remove {
+            background-color: #f44336;
+            color: white;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form id="myForm">
+            <h2 class="text-center">Dynamic Form Fields</h2>
+            <input class="input-field" type="email" id="email" name="Survey_Options[]" placeholder="Email">
+            <input class="input-field" type="text" id="name" name="Survey_Options[]" placeholder="Name">
+            <input class="input-field" type="text" id="anotherField" name="Survey_Options[]" placeholder="Another Field">
+            <div class="button-container">
+                <button id="add-field" type="button" class="add">Add</button>
+                <button id="remove-field" type="button" class="remove">Remove</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const form = document.querySelector('#myForm');
+        const addFieldButton = document.querySelector('#add-field');
+        const removeFieldButton = document.querySelector('#remove-field');
+
+        addFieldButton.onclick = function() {
+            const newField = document.createElement('input');
+            newField.setAttribute('type', 'text');
+            newField.setAttribute('name', 'Survey_Options[]');
+            newField.setAttribute('class', 'input-field');
+            newField.setAttribute('placeholder', 'New Field');
+            form.insertBefore(newField, form.querySelector('.button-container'));
+        }
+
+        removeFieldButton.onclick = function() {
+            const inputFields = form.querySelectorAll('.input-field');
+            if (inputFields.length > 3) {
+                form.removeChild(inputFields[inputFields.length - 1]);
+            }
+        }
+    </script>
+</body>
+</html>

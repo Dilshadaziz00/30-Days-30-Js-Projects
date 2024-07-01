@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/url-parse@1.5.10/dist/url-parse.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #080707;
+            font-family: Arial, sans-serif;
+        }
+
+        .box {
+            width: 500px;
+
+            background-color: #faf7f7;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 15px 0px 0px 0px;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 class="text-white">Quiz App</h2>
+    <div class="box">
+        <h4 class="queBOX">1) What is a radio button?</h4>
+        <div class="option">
+            <input class="options" id="option1" type="radio" value="a" name="option">
+            <label for="option1" class="form-check-label"> Option </label>
+        </div>
+        <div class="option">
+            <input class="options" id="option2" type="radio" value="b" name="option">
+            <label for="option2" class="form-check-label"> Option </label>
+        </div>
+        <div class="option">
+            <input class="options" id="option3" type="radio" value="c" name="option">
+            <label for="option3" class="form-check-label"> Option </label>
+        </div>
+        <div class="option">
+            <input class="options" id="option4" type="radio" value="d" name="option">
+            <label for="option4" class="form-check-label"> Option </label>
+        </div>
+        <div class="">
+            <button class="btn btn-primary w-100 mt-3 text-white " onclick="submitQuiz()">  Submit</button>
+        </div>
+    </div>
+    <script>
+        const questions = [
+            {
+                'que': 'Which is a programming language?',
+                'a': 'HTML',
+                'b': 'Python',
+                'c': 'CSS',
+                'd': 'XML',
+                'correct': 'b'
+            },
+            {
+                'que': 'Which language is used for server-side scripting?',
+                'a': 'HTML',
+                'b': 'Java',
+                'c': 'PHP',
+                'd': 'CSS',
+                'correct': 'c'
+            },
+            {
+                'que': 'Which language is used for adding interactivity to web pages?',
+                'a': 'HTML',
+                'b': 'Java',
+                'c': 'CSS',
+                'd': 'Javascript',
+                'correct': 'd'
+            },
+            {
+                'que': 'Which language is used for defining the style of web pages?',
+                'a': 'HTML',
+                'b': 'Java',
+                'c': 'Javascript',
+                'd': 'CSS',
+                'correct': 'd'
+            },
+            {
+                'que': 'Which language is used for structuring web pages?',
+                'a': 'HTML',
+                'b': 'Python',
+                'c': 'CSS',
+                'd': 'XML',
+                'correct': 'a'
+            }
+        ];
+        let index = 0;
+        let total = questions.length;
+        let right = 0, wrong = 0;
+        const queBOX = document.querySelector('.queBOX');
+        const optionsInput = document.querySelectorAll('.options');
+        const loadData = () => {
+            if (index === total) {
+                return endQuiz()
+            }
+            reset();
+            const data = questions[index];
+            queBOX.innerText = `${index + 1})${data.que}`;
+            optionsInput[0].nextElementSibling.innerText = data.a;
+            optionsInput[1].nextElementSibling.innerText = data.b;
+            optionsInput[2].nextElementSibling.innerText = data.c;
+            optionsInput[3].nextElementSibling.innerText = data.d;
+            console.log(queBOX)
+        }
+        const submitQuiz = () => {
+            const data = questions[index];
+            const ans = getAnwser();
+            if (!ans) {
+               
+              
+                return;
+            }
+            if (ans === data.correct) {
+                right++;
+            } else {
+                wrong++;
+            }
+            index++;
+            loadData();
+
+        }
+        const getAnwser = () => {
+            let anwser;
+            let optionsInputs = document.querySelector('.btn');
+          
+            optionsInput.forEach((input) => {
+                if (input.checked) {
+                    console.log(input.value)
+                    anwser = input.value;
+                  optionsInputs.disabled = false; 
+                    
+                }
+
+            })
+            return anwser;
+        };
+
+        const inputEmty = () => {
+            let emty;
+          
+            optionsInput.forEach((input) => {
+                if (input = "") {
+                    emty = input.value
+                   
+                }
+
+            })
+            return emty;
+        };
+       
+        const reset = () => {
+            optionsInput.forEach((input) => {
+                input.checked = false;
+
+            })
+        }
+
+        const endQuiz = () => {
+            const passOrFail = right >= 3 ? 'Congratulation Your quiz is Pass ' : 'Sorry Your quiz is Fail';
+            document.querySelector('.box').innerHTML = `
+        <div style="text-align:center">
+            <h3>Thanks For playing the Quiz</h3>
+            <h2>${right}/${total} are correct</h2> 
+            <h3>${passOrFail}</h3> 
+        </div>`;
+        };
+
+        const markEmptyOptions = () => {
+         let optionsInput = document.querySelectorAll('.options');
+         optionsInput.forEach((input) => {
+         if (!input.checked) {
+            input.style.Color = 'red'; 
+            console.log("Hello", input); 
+        }
+    });
+};
+
+
+        loadData();
+    </script>
+</body>
+
+</html>

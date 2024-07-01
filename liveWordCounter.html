@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roller</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+       
+        p {
+            padding: 32px 119px;
+            font-size: 3em;
+            cursor: pointer;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    
+    textarea{
+     
+     
+        border: none;
+        resize: none;
+        outline: none;
+        font-size: 11px;
+        line-height: 32px;
+        color: #000;
+    }
+    </style>
+</head>
+<body>
+    
+    <textarea class="input-text" row="12" placeholder="Type here..."></textarea>
+  <div class="d-flex">
+    <h2>Word</h2>
+    <p class="word" id="word" >0</p>
+    <h2>Char</h2>
+    <p id="char" >0</p>
+</div>
+
+   
+   <script>
+       let inputText = document.querySelector('.input-text');
+       let charCount = document.querySelector('#char');
+       let wordCount = document.querySelector('#word');
+       inputText.addEventListener('input', () => {
+        charCount.textContent=inputText.value.length;
+        console.log(charCount)
+        let text =inputText.value.trim();
+        wordCount.textContent=text.split(/\s+/).filter((item) => item).length;
+         console.log(wordCount)
+       })
+ 
+   </script>
+</body>
+</html>

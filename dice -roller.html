@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roller</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dice Roller</h1>
+    <img id="diceImage" src="dice.png" alt="Dice">
+    <button onclick="rollDice()">Shuffle</button>
+
+    <script>
+        function rollDice() {
+            const diceImages = [
+                'https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Die_face_1.svg/1024px-Die_face_1.svg.png',
+                'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Die_face_2.svg/1024px-Die_face_2.svg.png',
+                'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Die_face_3.svg/1024px-Die_face_3.svg.png',
+                'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Die_face_4.svg/1024px-Die_face_4.svg.png',
+                'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Die_face_5.svg/1024px-Die_face_5.svg.png',
+                'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Die_face_6.svg/1024px-Die_face_6.svg.png'
+            ];
+            const randomIndex = Math.floor(Math.random() * diceImages.length);
+            document.getElementById('diceImage').src = diceImages[randomIndex];
+        }
+    </script>
+</body>
+</html>

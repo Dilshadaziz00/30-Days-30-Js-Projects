@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoom Effect</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #080707;
+            font-family: Arial, sans-serif;
+        }
+        h2{
+            color:#fff;
+        }
+        img{
+           max-width: 350px;
+            height:  300px;
+            border-radius: 5%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+       
+    </style>
+</head>
+<body>
+    <h2 class="">Zoom Effect</h2>
+    <div class="container">
+       <img src="cat.jpg">
+    </div>
+</body>
+<script>
+const{body}=document;
+let zoomAffected= false;
+window.addEventListener('click',() => {
+    zoomAffected=!zoomAffected;
+})
+window.addEventListener('mousemove',(e) => {
+  const {clientX:x , clientY:y }= e;
+  if(zoomAffected){
+    body.style.transform = `scale(2)`
+    body.style.transformOrigin= `${x}px ${y}px`
+  } else{
+    body.style.transform = `none`
+  }
+})
+</script>
+</html>

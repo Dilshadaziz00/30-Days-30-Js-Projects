@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roller</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+       
+        p {
+            padding: 32px 119px;
+            font-size: 3em;
+            cursor: pointer;
+            background-color: #0f0f0f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+       
+    </style>
+</head>
+<body>
+    
+    <h2 >Color picker </h2>
+    <p id="box" >10:00</p>
+
+   
+   <script>
+       let box = document.querySelector('#box');
+       const startMm =10;
+       let time= startMm * 60;
+ setInterval( counTer,1000);
+           function counTer(){
+         const min=Math.floor(time / 60);
+          let sec = time % 60;
+          box.innerHTML=`${min}:${sec}`;
+          time--;
+
+           }
+   </script>
+</body>
+</html>
