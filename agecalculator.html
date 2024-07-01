@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,59 +10,100 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+            background-color: #2a2a72;
+            background-image: linear-gradient(315deg, #2a2a72 0%, #2e2a68 74%);
         }
 
-        input {
+        .calculator {
+          
+            background-color: #4c2885;
+            background-image: linear-gradient(315deg, #4c2885 0%, #4c11ac 100%);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            color: white;
+        }
+
+        input[type="date"],
+        button {
+            background-color: #4c2885;
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05), 0 15px 40px rgba(0, 0, 0, 0.1);
             padding: 8px;
             margin: 5px;
+            width: calc(100% - 18px);
+            box-sizing: border-box;
+            color: white;
         }
+        input:focus {
+           outline: none;
+          }
+
+        button {
+            background-color: #2a2a72;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4c2885;
+        }
+
+        h1,
+        h2 {
+            margin-top: 0;
+            color: white;
+        }
+
+        #result {
+            text-align: center;
+        }
+       
     </style>
 </head>
+
 <body>
 
-    <h1>Age Calculator</h1>
+    <div class="calculator">
+        <h1>Age Calculator</h1>
 
-    <label for="birthDate">Enter your birthdate:</label>
-    <input type="date" id="birthDate">
+        <label for="birthDate">Enter your birthdate:</label>
+        <input type="date" id="birthDate">
 
-    <button onclick="calculate()">Calculate</button>
+        <button onclick="calculate()">Calculate</button>
 
-    <h2>Result:</h2>
-    <p id="result"></p>
+        <h2>Result:</h2>
+        <p  id="result"></p>
+    </div>
+
     <script>
         function calculate() {
-            // Get the birthdate value
             let birthDate = document.getElementById('birthDate').value;
-
-            // Check if a date is selected
             if (birthDate) {
-                // Parse birthdate and current date
                 let today = new Date();
                 let birthDateObj = new Date(birthDate);
-
-                // Calculate age
                 let age = today.getFullYear() - birthDateObj.getFullYear();
                 if (today.getMonth() < birthDateObj.getMonth() || (today.getMonth() === birthDateObj.getMonth() && today.getDate() < birthDateObj.getDate())) {
-                    age;
+                    age--;
                 }
-
-                // Calculate months
-            let months = (today.getFullYear()- birthDateObj.getFullYear()) * 12 + today.getMonth() - birthDateObj.getMonth();
-
-                // Calculate days
-            let days = Math.floor((today - birthDateObj) / (1000 * 60 * 60 * 24));
-
-                // Calculate minutes
-            let minutes = Math.floor((today - birthDateObj) / (1000 * 60));
-
-                // Display the result
-                document.getElementById('result').innerHTML = `Your age is: ${age} years, ${months} months, ${days} days, and ${minutes} minutes.`            } 
-                else {
-                // Display an error message if no date is selected
+                let months = (today.getFullYear() - birthDateObj.getFullYear()) * 12 + today.getMonth() - birthDateObj.getMonth();
+                let days = Math.floor((today - birthDateObj) / (1000 * 60 * 60 * 24));
+                let minutes = Math.floor((today - birthDateObj) / (1000 * 60));
+                document.getElementById('result').innerHTML = `Your age is: ${age} years, ${months} months, ${days} days, and ${minutes} minutes.`;
+            } else {
                 document.getElementById('result').innerHTML = "Please enter your birthdate.";
             }
         }
     </script>
 
 </body>
-</html
+
+</html>

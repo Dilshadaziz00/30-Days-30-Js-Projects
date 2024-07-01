@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter with Reset</title>
+    <style>
+        body {
+            background-color: #2a2a72;
+            background-image: linear-gradient(315deg, #2a2a72 0%, #2e2a68 74%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+           
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #4c2885;
+            background-image: linear-gradient(315deg, #4c2885 0%, #4c11ac 100%);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          
+        }
+
+        .container input {
+            background-color: #2a2a72;
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05), 0 15px 40px rgba(0, 0, 0, 0.1);
+            color: white;
+            width: 50px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .container input:focus {
+           outline: none;
+          }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            background-color: #2a2a72;
+            color: white;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #4c2885;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <button id="decrement">-</button>
+        <input type="text" id="counter" value="0" readonly>
+        <button id="increment">+</button>
+        <button id="reset">Reset</button>
+    </div>
+
+    <script>
+        let input = document.querySelector('#counter');
+        let reset = document.querySelector('#reset');
+        let increment = document.querySelector('#increment');
+        let decrement = document.querySelector('#decrement');
+
+        let count = 0;
+
+        increment.addEventListener('click', () => {
+            count++;
+            input.value = count;
+        });
+
+        decrement.addEventListener('click', () => {
+            if (input.value > 0)
+                count--;
+            input.value = count;
+        });
+
+        reset.addEventListener('click', () => {
+            count = 0;
+            input.value = count;
+        });
+    </script>
+</body>
+
+</html>

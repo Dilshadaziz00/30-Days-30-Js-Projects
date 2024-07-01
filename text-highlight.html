@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Highlighter</title>
+  <style>
+    body {
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+
+    h2 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    input {
+      background-color: #2a2a72;
+      border-radius: 10px;
+      box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05), 0 15px 40px rgba(0, 0, 0, 0.1);
+      border: none;
+      font-size: 11px;
+      line-height: 32px;
+      color: #fff;
+      width: 200px;
+    }
+
+    input::placeholder {
+      color: #bbb;
+    }
+
+    input:focus {
+      outline: none;
+    }
+   .btn{
+    margin-top: 18px ;
+    width: 200px;
+    padding: 7px;
+    color: #fff;
+    border: 1px solid  #2a2a72;
+    background-color: #2a2a72;
+      border-radius: 10px;
+      box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05), 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+    p {
+      width: 500px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <input type="search" class="input-text" placeholder="Type here...">
+  <button class="btn" onclick="search()">Search</button>
+  <div class="">
+
+    <p id="paragraph">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+      scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+      electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+      Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+      PageMaker including versions of Lorem Ipsum.</p>
+  </div>
+
+  <script>
+    function search() {
+      let inPut = document.querySelector('.input-text').value;
+      let paraG = document.querySelector('#paragraph');
+      let regex = new RegExp('(' + inPut + ')');
+      inPut === "" ? null : paraG.innerHTML = paraG.innerHTML.replace(regex, match => `<mark>${match}</mark>`);
+
+    }
+  </script>
+</body>
+
+</html>
