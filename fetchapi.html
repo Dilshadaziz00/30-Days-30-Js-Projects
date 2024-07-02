@@ -15,7 +15,7 @@
       font-weight: bold;
     }
     img:hover{
-      transform: scale(1.2);
+      transform: scale(1.2) ;
       /* pointer-events: auto; */
       cursor: pointer;
       
@@ -98,6 +98,7 @@
         document.getElementById('table_body').innerHTML = tableData;
       });
     //// This is for function searchProducts
+
     function searchData() {
       const searchInput = document.getElementById('searchInput');
       const searchTerm = searchInput.value.toLowerCase();
@@ -109,6 +110,8 @@
 
       let filteredRowsHtml = "";
       filteredData.forEach(values => {
+        const formattedPrice = `<strong>${values.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</strong>`;
+
         filteredRowsHtml +=
           `<tr>
           <td><img src="${values.image}"></td>

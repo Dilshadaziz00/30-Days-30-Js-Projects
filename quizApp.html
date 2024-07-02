@@ -7,8 +7,6 @@
     <title>Quiz App</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/url-parse@1.5.10/dist/url-parse.min.js"></script>
     <style>
         body {
             display: flex;
@@ -16,26 +14,50 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #080707;
+            background-color: #4a4a96;
+            background-image: linear-gradient(315deg, #6868b1 0%, #575392 74%);
             font-family: Arial, sans-serif;
         }
 
         .box {
             width: 500px;
-
-            background-color: #faf7f7;
+            color: #fff;
+            background-color: #4c2885;
+            background-image: linear-gradient(315deg, #4c2885 0%, #4c11ac 100%);
             border-radius: 10px;
             padding: 20px;
         }
-
+          .options{
+            accent-color: rgb(21, 240, 21);
+          }
         .option {
             display: flex;
             align-items: center;
-            padding: 15px 0px 0px 0px;
+            padding: 15px 0px;
+            color: #fff;
         }
 
         .option input[type="radio"] {
             margin-right: 10px;
+        }
+
+        .button {
+            background-color: #280b56;
+        }
+
+        .button:hover {
+            background-color: #361669;
+        }
+
+        .button:focus {
+         
+            border-color: #361669;
+        }
+
+        .button:disabled {
+            background-color: #361669;
+            cursor: not-allowed;
+            border-color: #361669;
         }
     </style>
 </head>
@@ -46,24 +68,25 @@
         <h4 class="queBOX">1) What is a radio button?</h4>
         <div class="option">
             <input class="options" id="option1" type="radio" value="a" name="option">
-            <label for="option1" class="form-check-label"> Option </label>
+            <label for="option1" class="form-check-label"> Option A </label>
         </div>
         <div class="option">
             <input class="options" id="option2" type="radio" value="b" name="option">
-            <label for="option2" class="form-check-label"> Option </label>
+            <label for="option2" class="form-check-label"> Option B </label>
         </div>
         <div class="option">
             <input class="options" id="option3" type="radio" value="c" name="option">
-            <label for="option3" class="form-check-label"> Option </label>
+            <label for="option3" class="form-check-label"> Option C </label>
         </div>
         <div class="option">
             <input class="options" id="option4" type="radio" value="d" name="option">
-            <label for="option4" class="form-check-label"> Option </label>
+            <label for="option4" class="form-check-label"> Option D </label>
         </div>
-        <div class="">
-            <button class="btn btn-primary w-100 mt-3 text-white " onclick="submitQuiz()">  Submit</button>
+        <div>
+            <button id="submitBtn" class="btn button w-100 mt-3 text-white" onclick="submitQuiz()" disabled>Submit</button>
         </div>
     </div>
+
     <script>
         const questions = [
             {
@@ -107,97 +130,76 @@
                 'correct': 'a'
             }
         ];
+
         let index = 0;
         let total = questions.length;
         let right = 0, wrong = 0;
+
         const queBOX = document.querySelector('.queBOX');
         const optionsInput = document.querySelectorAll('.options');
+        const submitBtn = document.getElementById('submitBtn');
+
         const loadData = () => {
             if (index === total) {
-                return endQuiz()
+                return endQuiz();
             }
             reset();
             const data = questions[index];
-            queBOX.innerText = `${index + 1})${data.que}`;
+            queBOX.innerText = `${index + 1}) ${data.que}`;
             optionsInput[0].nextElementSibling.innerText = data.a;
             optionsInput[1].nextElementSibling.innerText = data.b;
             optionsInput[2].nextElementSibling.innerText = data.c;
             optionsInput[3].nextElementSibling.innerText = data.d;
-            console.log(queBOX)
-        }
+        };
+
         const submitQuiz = () => {
             const data = questions[index];
-            const ans = getAnwser();
-            if (!ans) {
-               
-              
-                return;
-            }
-            if (ans === data.correct) {
+            const answer = getAnswer();
+            if (answer === data.correct) {
                 right++;
             } else {
                 wrong++;
             }
+
             index++;
             loadData();
+        };
 
-        }
-        const getAnwser = () => {
-            let anwser;
-            let optionsInputs = document.querySelector('.btn');
-          
-            optionsInput.forEach((input) => {
+        const getAnswer = () => {
+            let answer = null;
+            optionsInput.forEach(input => {
                 if (input.checked) {
-                    console.log(input.value)
-                    anwser = input.value;
-                  optionsInputs.disabled = false; 
-                    
+                    answer = input.value;
                 }
-
-            })
-            return anwser;
+            });
+            return answer;
         };
 
-        const inputEmty = () => {
-            let emty;
-          
-            optionsInput.forEach((input) => {
-                if (input = "") {
-                    emty = input.value
-                   
-                }
-
-            })
-            return emty;
-        };
-       
         const reset = () => {
-            optionsInput.forEach((input) => {
+            optionsInput.forEach(input => {
                 input.checked = false;
-
-            })
-        }
+               
+            });
+            submitBtn.disabled = true; 
+            
+        };
 
         const endQuiz = () => {
-            const passOrFail = right >= 3 ? 'Congratulation Your quiz is Pass ' : 'Sorry Your quiz is Fail';
+            const passOrFail = right >= 3 ? 'Congratulations! You passed the quiz.' : 'Sorry, you failed the quiz.';
             document.querySelector('.box').innerHTML = `
-        <div style="text-align:center">
-            <h3>Thanks For playing the Quiz</h3>
-            <h2>${right}/${total} are correct</h2> 
-            <h3>${passOrFail}</h3> 
-        </div>`;
+                <div style="text-align: center">
+                    <h3>Thanks for playing the Quiz</h3>
+                    <h2>${right}/${total} correct answers</h2> 
+                    <h3>${passOrFail}</h3> 
+                </div>`;
         };
 
-        const markEmptyOptions = () => {
-         let optionsInput = document.querySelectorAll('.options');
-         optionsInput.forEach((input) => {
-         if (!input.checked) {
-            input.style.Color = 'red'; 
-            console.log("Hello", input); 
-        }
-    });
-};
-
+        optionsInput.forEach(input => {
+            input.addEventListener('change', () => {
+                submitBtn.disabled = !getAnswer();
+               
+            });
+        });
 
         loadData();
     </script>

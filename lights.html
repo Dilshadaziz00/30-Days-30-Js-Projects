@@ -10,8 +10,9 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            background-color: #080707;
+            height: 90vh;
+             background-color: #2a2a72;
+            background-image: linear-gradient(315deg, #2a2a72 0%, #2e2a68 74%);
             font-family: Arial, sans-serif;
         }
         .traffic-light {
@@ -63,10 +64,12 @@
     function changeLight(){
       circles[activeLight].classList='circle';
       activeLight++;
- if (activeLight > 2)
- {
-    activeLight=0;
- }
+ //  if (activeLight > 2)
+//  {
+//     activeLight=0;
+//  }
+ activeLight = activeLight > 2 ? 0 : activeLight;
+
    let currantLight=circles[activeLight];
    currantLight.classList.add(currantLight.getAttribute('color'));
     }

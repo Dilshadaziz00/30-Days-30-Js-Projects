@@ -11,22 +11,26 @@
     <style>
         body, html {
             height: 100%;
-            background-color: rgb(12, 11, 11);
+            background-color: #2a2a72;
+            background-image: linear-gradient(315deg, #2a2a72 0%, #2e2a68 74%);
         }
         .container {
             height: 100%;
         }
         .card {
-            background-color: white;
+            background-color: #4c2885;
         }
         .clock {
             font-size: 2rem;
         }
         .amPm{
             font-size: 12px;
-    margin-top: 24px;
+              margin-top: 24px;
+              color: #fff !important;
                    }
-        
+                   #hour, #minute, #second{
+                    background-color: #32116b;
+                   }
     </style>
 </head>
 <body>
@@ -35,12 +39,12 @@
             <h2 class="mb-4 text-white">Digital Clock</h2>
             <div class="card">
                 <div class="card-body d-flex gap-2 clock">
-                    <h2 class="bg-dark text-white px-1 rounded" id="hour">00</h2>
-                    <h2 class="dots text-dark">:</h2>
-                    <h2 class="bg-dark text-white px-1 rounded" id="minute">00</h2>
-                    <h2 class="dots text-dark">:</h2>
-                    <h2 class="bg-dark text-white px-1 rounded" id="second">00</h2>
-                    <h2 class="text-dark amPm" id="amPm">AM</h2>
+                    <h2 class=" text-white px-1 rounded hour" id="hour">00</h2>
+                    <h2 class="dots  text-white">:</h2>
+                    <h2 class=" text-white px-1 rounded" id="minute">00</h2>
+                    <h2 class="dots text-white">:</h2>
+                    <h2 class=" text-white px-1 rounded" id="second">00</h2>
+                    <h2 class="text-dark  amPm" id="amPm">AM</h2>
                 </div>
             </div>
         </div>

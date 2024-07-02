@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch data</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js" async></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <style>
+        img {
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="text-center my-4 ">Fetch Data From API</h1>
+    <div class="container ">
+        <table class="table  table-bordered ">
+            <thead class="table-dark ">
+                <tr>
+                    <th >image</th>
+                    <th >Price</th>
+                    <th >Title</th>
+                    <th >Description</th>
+                    <th >DiscountPercentage</th>
+                    <th >Rating</th>
+                    <th >Stock</th>
+                    <th >Brand</th>
+                    <th >Category</th>
+
+
+
+                </tr>
+            </thead>
+            <tbody id="table-body">
+
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+
+
+    getProducts()
+
+    async function getProducts() {
+        await fetch('https://dummyjson.com/products').then((data) => {
+
+            return data.json();
+        }).then((objectData) => {
+            console.log(objectData)
+            let tableData = "";
+            objectData.products.forEach((values) => {
+                tableData +=
+                    `<tr>
+             <td><img src="${values.images}"></td>
+             <td>${values.price}</td>
+             <td>${values.title}</td>
+             <td>${values.description}</td>
+             <td>${values.discountPercentage}</td>
+             <td>${values.rating}</td>
+             <td>${values.stock}</td>
+             <td>${values.brand}</td>
+             <td>${values.category}</td>
+
+
+           </tr>`;
+            });
+
+            document.getElementById('table-body').innerHTML = tableData;
+
+        });
+    }
+</script>
+
+</html>

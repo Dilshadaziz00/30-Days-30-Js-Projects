@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dice Roller</title>
+    <title>Live Word Counter</title>
     <style>
         body {
             display: flex;
@@ -11,59 +11,92 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f0f0f0;
+            background-color: #2a2a72;
+            background-image: linear-gradient(315deg, #2a2a72 0%, #2e2a68 74%);
             font-family: Arial, sans-serif;
+            color: white;
+            margin: 0;
+            padding: 0;
         }
+
         h2 {
             font-size: 2.5em;
             margin-bottom: 20px;
+            text-align: center;
         }
-       
-        p {
-            padding: 32px 119px;
+
+        p{
             font-size: 3em;
             cursor: pointer;
-            background-color: red;
+            background-color: #4c2885;
             color: white;
             border: none;
             border-radius: 5px;
+            padding: 15px 70px 15px 70px;
+            margin: 10px;
         }
-    
-    textarea{
-     
-     
-        border: none;
-        resize: none;
-        outline: none;
-        font-size: 11px;
-        line-height: 32px;
-        color: #000;
-    }
+
+        textarea {
+            width: 20%;
+            height: 100px;
+            background-color: #4c2885;
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05), 0 15px 40px rgba(0, 0, 0, 0.1);
+            color: white;
+            font-size: 16px;
+            line-height: 1.5;
+            padding: 10px;
+            resize: none;
+            outline: none;
+        }
+
+        textarea::placeholder {
+            color: #bbb;
+        }
+
+        .clear-button {
+            background-color: #4c2885;
+            border-radius: 10px;
+            border: none;
+            padding: 15px 30px 15px 30px;
+            color: #fff;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .clear-button:hover {
+            background-color: #583492;
+        }
     </style>
 </head>
 <body>
-    
-    <textarea class="input-text" row="12" placeholder="Type here..."></textarea>
-  <div class="d-flex">
-    <h2>Word</h2>
-    <p class="word" id="word" >0</p>
-    <h2>Char</h2>
-    <p id="char" >0</p>
-</div>
+    <textarea class="input-text" placeholder="Type here..."></textarea>
+    <div>
+        <h2>Word</h2>
+        <p id="word">0</p>
+        <h2>Char</h2>
+        <p id="char">0</p>
+    </div>
+    <button class="clear-button" onclick="clearText()">Clear</button>
+    <script>
+        let inputText = document.querySelector('.input-text');
+        let charCount = document.querySelector('#char');
+        let wordCount = document.querySelector('#word');
+        
+        inputText.addEventListener('input', updateCounts);
 
-   
-   <script>
-       let inputText = document.querySelector('.input-text');
-       let charCount = document.querySelector('#char');
-       let wordCount = document.querySelector('#word');
-       inputText.addEventListener('input', () => {
-        charCount.textContent=inputText.value.length;
-        console.log(charCount)
-        let text =inputText.value.trim();
-        wordCount.textContent=text.split(/\s+/).filter((item) => item).length;
-         console.log(wordCount)
-       })
- 
-   </script>
+        function updateCounts() {
+            let text = inputText.value.trim();
+            charCount.textContent = text.length;
+            wordCount.textContent = text.split(/\s+/).filter((item) => item).length;
+        }
+
+        function clearText() {
+            inputText.value = "";
+            charCount.textContent = "0";
+            wordCount.textContent = "0";
+        }
+    </script>
 </body>
 </html>
